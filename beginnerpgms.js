@@ -1,4 +1,4 @@
-//console.log('hello')
+console.log('hello')
 
 //beginner programs
 //1.to delay the logger>>>>
@@ -22,7 +22,7 @@ const countdown= setInterval(() => {
 }, 1000);
 
 
-//callback function chained
+//3.callback function chained
 
 function step1(callback){
     setTimeout(()=>{
@@ -52,13 +52,13 @@ step1(()=>{
 });
 
 
-//creating a promise example
+//4.creating a promise example
 
 function checkAge(age){
-    return new Promise((resolve,reject)=> {
-        if(age>18){
+    return new Promise((resolve,reject)=> {   // new promise is created
+        if(age>18){                             //if resolve case
             resolve('access grabted');
-        }else{
+        }else{                                  //if reject case
             reject('no acsess must be 18 or old');
         }
     });
@@ -74,15 +74,51 @@ checkAge(20)
 });
 
 
-//fetching a simple userdata predefined
+//5.fetching a simple userdata predefined (fake data like an API)
 function fetchUseData(){
-    return new Promise((yes,no)=>{
+    return new Promise((resolve,reject)=>{
         setTimeout(()=>{
-            const userData={
+            const userData={            //pre defined data for fetching
                 id:1,
                 name:'sanju',
                 email:'sanju@gmail.com'
+
             };
-        })
-    })
+            resolve(userData);// i am always resolving promise using resolve
+        },2000);
+    });
 }
+
+fetchUseData()
+.then(user=>{
+    console.log('data recived:',user);
+
+})
+.catch(error=>{                 //for just having safe case if error occurs it is catched
+    console.log('error:',error);
+})
+
+
+//practicing the async and await now 
+
+//delaying the async function here
+
+
+function delay(milli_sec) {
+    return new Promise(resolve => setTimeout(resolve, milli_sec));
+}
+
+
+async function delay_for_two_sec(){
+    console.log('wating for time');
+    await delay(2000);
+    const data={
+        name:'sanju',
+        place:'Bangalore',
+        date:'30th April 2025'
+    };
+    alert('success!!!!! Data is received >>>click to view data')
+    console.log('Data:',data);
+}
+
+delay_for_two_sec();
